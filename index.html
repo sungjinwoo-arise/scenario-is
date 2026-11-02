@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8fc">
+    <meta
+      name="description"
+      content="Explore nine questions about integration services, from API design to reliability."
+    >
+    <title>XStock - IntegrationServices</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: #f7f8fc;
+        color: #20243a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        background:
+          radial-gradient(ellipse at 10% 0%, rgb(220 227 255 / 55%), transparent 34rem),
+          #f7f8fc;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .page {
+        width: min(100% - 48px, 1080px);
+        margin: 0 auto;
+        padding: 72px 0 64px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin: 0 0 16px;
+        color: #606782;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #7164ed;
+        content: "";
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.35rem, 6vw, 4rem);
+        font-weight: 750;
+        letter-spacing: -0.065em;
+        line-height: 1.05;
+      }
+
+      .intro {
+        max-width: 570px;
+        margin: 18px 0 0;
+        color: #697087;
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 44px;
+      }
+
+      .card {
+        --accent: #6459de;
+        --tint: #efedff;
+
+        position: relative;
+        display: flex;
+        min-height: 174px;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        overflow: hidden;
+        padding: 24px;
+        border: 1px solid color-mix(in srgb, var(--accent) 15%, white);
+        border-radius: 18px;
+        background: linear-gradient(145deg, white 15%, var(--tint));
+        box-shadow: 0 5px 16px rgb(34 39 74 / 4%);
+        color: #252943;
+        cursor: pointer;
+        text-align: left;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .card::after {
+        position: absolute;
+        top: -34px;
+        right: -30px;
+        width: 112px;
+        height: 112px;
+        border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+        border-radius: 50%;
+        box-shadow: 0 0 0 14px color-mix(in srgb, var(--accent) 6%, transparent);
+        content: "";
+        pointer-events: none;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: color-mix(in srgb, var(--accent) 38%, white);
+        box-shadow: 0 14px 28px rgb(34 39 74 / 10%);
+      }
+
+      .card:focus-visible,
+      .close-button:focus-visible {
+        outline: 3px solid var(--accent, #6459de);
+        outline-offset: 4px;
+      }
+
+      .card-number {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 750;
+        letter-spacing: 0.11em;
+      }
+
+      .card-bottom {
+        display: flex;
+        width: 100%;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .card-title {
+        font-size: 1.1rem;
+        font-weight: 680;
+        letter-spacing: -0.025em;
+      }
+
+      .card-arrow {
+        color: var(--accent);
+        font-size: 1.25rem;
+        line-height: 1;
+        transition: transform 180ms ease;
+      }
+
+      .card:hover .card-arrow {
+        transform: translateX(4px);
+      }
+
+      .card:nth-child(2) {
+        --accent: #17836b;
+        --tint: #e6f7f1;
+      }
+
+      .card:nth-child(3) {
+        --accent: #cc7141;
+        --tint: #fff0e7;
+      }
+
+      .card:nth-child(4) {
+        --accent: #3277c5;
+        --tint: #e9f2ff;
+      }
+
+      .card:nth-child(5) {
+        --accent: #b64b82;
+        --tint: #fcebf4;
+      }
+
+      .card:nth-child(6) {
+        --accent: #aa7a12;
+        --tint: #fff6db;
+      }
+
+      .card:nth-child(7) {
+        --accent: #56853b;
+        --tint: #eef7e7;
+      }
+
+      .card:nth-child(8) {
+        --accent: #4971b8;
+        --tint: #eaf0ff;
+      }
+
+      .card:nth-child(9) {
+        --accent: #8756bd;
+        --tint: #f3eaff;
+      }
+
+      .hint {
+        margin: 22px 0 0;
+        color: #858ba0;
+        font-size: 0.875rem;
+        text-align: center;
+      }
+
+      .modal-backdrop {
+        position: fixed;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgb(25 29 47 / 48%);
+        inset: 0;
+      }
+
+      .modal-backdrop[hidden] {
+        display: none;
+      }
+
+      .modal {
+        width: min(100%, 500px);
+        padding: 32px;
+        border: 1px solid rgb(255 255 255 / 70%);
+        border-radius: 22px;
+        background: #fff;
+        box-shadow: 0 24px 80px rgb(20 24 48 / 24%);
+        animation: modal-enter 160ms ease-out;
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .modal-label {
+        margin: 0 0 9px;
+        color: var(--modal-accent, #6459de);
+        font-size: 0.75rem;
+        font-weight: 750;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .modal h2 {
+        margin: 0;
+        font-size: 1.65rem;
+        letter-spacing: -0.045em;
+      }
+
+      .close-button {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: #f2f3f8;
+        color: #525970;
+        cursor: pointer;
+        font-size: 1.35rem;
+      }
+
+      .close-button:hover {
+        background: #e9eaf1;
+      }
+
+      .modal-question {
+        margin: 24px 0 0;
+        color: #525970;
+        font-size: 1.1rem;
+        line-height: 1.75;
+      }
+
+      @keyframes modal-enter {
+        from {
+          transform: translateY(8px) scale(0.98);
+          opacity: 0;
+        }
+
+        to {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .page {
+          padding-top: 54px;
+        }
+
+        .card-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .page {
+          width: min(100% - 32px, 420px);
+          padding: 42px 0;
+        }
+
+        .card-grid {
+          grid-template-columns: 1fr;
+          margin-top: 32px;
+        }
+
+        .card {
+          min-height: 142px;
+          padding: 20px;
+        }
+
+        .modal {
+          padding: 26px 22px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <p class="eyebrow">Integration Services</p>
+        <h1>XStock - IntegrationServices</h1>
+        <p class="intro">
+          Nine topics to explore. Choose a card to reveal its question.
+        </p>
+      </header>
+
+      <section class="card-grid" aria-label="Integration service questions">
+        <button class="card" type="button" data-title="Integration Foundations" data-question="What should an integration service own, and how should it fit between the systems it connects?">
+          <span class="card-number">01 / FOUNDATIONS</span>
+          <span class="card-bottom"><span class="card-title">Integration Foundations</span><span class="card-arrow" aria-hidden="true">→</span></span>
+        </button>
+        <button class="card" type="button" data-title="API Contracts" data-question="How can clear API contracts help connected services evolve without breaking one another?">
+          <span class="card-number">02 / API DESIGN</span>
+          <span class="card-bottom"><span class="card-title">API Contracts</span><span class="card-arrow" aria-hidden="true">→</span></span>
+        </button>
+        <button class="card" type="button" data-title="Event-Driven Design" data-question="When is an event-driven approach a better fit than a direct request between services?">
+          <span class="card-number">03 / MESSAGING</span>
+          <span class="card-bottom"><span class="card-title">Event-Driven Design</span><span class="card-arrow" aria-hidden="true">→</span></span>
+        </button>
+        <button class="card" type="button" data-title="Data Mapping" data-question="How should data be validated and transformed as it moves between systems with different models?">
+          <span class="card-number">04 / DATA FLOW</span>
+          <span class="card-bottom"><span class="card-title">Data Mapping</span><span class="card-arrow" aria-hidden="true">→</span></span>
+        </button>
+        <button class="card" type="button" data-title="Authentication" data-question="How can an integration securely authenticate with each connected service while keeping access appropriately scoped?">
+          <span class="card-number">05 / SECURITY</span>
+          <span class="card-bottom"><span class="card-title">Authentication</span><span class="card-arrow" aria-hidden="true">→</span></span>
+        </button>
+        <button class="card" type="button" data-title="Error Handling" data-question="Which failures should be retried, and how can permanent errors be surfaced without losing useful context?">
+          <span class="card-number">06 / RESILIENCE</span>
+          <span class="card-bottom"><span class="card-title">Error Handling</span><span class="card-arrow" aria-hidden="true">→</span></span>
+        </button>
+        <button class="card" type="button" data-title="Observability" data-question="What logs, metrics, and traces make it possible to follow one transaction across integrated systems?">
+          <span class="card-number">07 / VISIBILITY</span>
+          <span class="card-bottom"><span class="card-title">Observability</span><span class="card-arrow" aria-hidden="true">→</span></span>
+        </button>
+        <button class="card" type="button" data-title="Reliability" data-question="How can an integration stay dependable when a connected service is slow, unavailable, or returning duplicate messages?">
+          <span class="card-number">08 / OPERATIONS</span>
+          <span class="card-bottom"><span class="card-title">Reliability</span><span class="card-arrow" aria-hidden="true">→</span></span>
+        </button>
+        <button class="card" type="button" data-title="Deployment" data-question="How can integration changes be deployed and rolled back safely across environments?">
+          <span class="card-number">09 / DELIVERY</span>
+          <span class="card-bottom"><span class="card-title">Deployment</span><span class="card-arrow" aria-hidden="true">→</span></span>
+        </button>
+      </section>
+
+      <p class="hint">Pick any card to see its question.</p>
+    </main>
+
+    <div class="modal-backdrop" id="question-backdrop" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-question">
+        <div class="modal-header">
+          <div>
+            <p class="modal-label" id="modal-label">Question 01</p>
+            <h2 id="modal-title"></h2>
+          </div>
+          <button class="close-button" id="close-modal" type="button" aria-label="Close question">×</button>
+        </div>
+        <p class="modal-question" id="modal-question"></p>
+      </section>
+    </div>
+
+    <script>
+      const backdrop = document.querySelector("#question-backdrop");
+      const modalTitle = document.querySelector("#modal-title");
+      const modalLabel = document.querySelector("#modal-label");
+      const modalQuestion = document.querySelector("#modal-question");
+      const closeButton = document.querySelector("#close-modal");
+      const cards = document.querySelectorAll(".card");
+      let previouslyFocusedCard;
+
+      function closeModal() {
+        backdrop.hidden = true;
+        previouslyFocusedCard?.focus();
+      }
+
+      cards.forEach((card, index) => {
+        card.addEventListener("click", () => {
+          previouslyFocusedCard = card;
+          modalLabel.textContent = `Question ${String(index + 1).padStart(2, "0")}`;
+          modalTitle.textContent = card.dataset.title;
+          modalQuestion.textContent = card.dataset.question;
+          backdrop.hidden = false;
+          closeButton.focus();
+        });
+      });
+
+      closeButton.addEventListener("click", closeModal);
+      backdrop.addEventListener("click", (event) => {
+        if (event.target === backdrop) closeModal();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !backdrop.hidden) closeModal();
+      });
+    </script>
+  </body>
+</html>
